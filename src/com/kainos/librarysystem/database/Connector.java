@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class Connector {
 	
 	private static final String username = "libraryUser";
-	private static final String password = "MySuperSafePassw0rd";
+	private static final String password = "MySuperSafePassw0rd!";
 	private static final String connection = "jdbc:mysql://localhost/Library";
 	
 

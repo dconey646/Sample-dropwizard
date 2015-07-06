@@ -4,6 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+
+import com.kainos.librarysystem.database.Book;
+import com.kainos.librarysystem.database.Connector;
 
 public class Query {
 	
@@ -16,13 +20,13 @@ public class Query {
 		s = Connector.getConnection();
 	}
 	
-	public ArrayList<Book> getAllBooks()
+	public List<Book> getAllBooks()
 	{
 		ResultSet r;
 		ArrayList<Book> books = new ArrayList<Book>();
 		
 		try{
-			r = s.executeQuery("select * from Books");
+			r = s.executeQuery("select * from Book;");
 			while(r.next())
 			{
 				books.add(new Book(r.getInt(1), r.getString(2), r.getString(3), r.getInt(4), r.getString(5)));

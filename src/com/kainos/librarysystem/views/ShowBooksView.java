@@ -9,11 +9,13 @@ public class ShowBooksView extends View{
 	
 	public List<Book> books;
 	
-	public ShowBooksView(List<Book> books){
+
+	
+	public ShowBooksView(List<com.kainos.librarysystem.database.Book> booksList) {
 		super("/bookList.ftl");
 		setBooks(books);
 	}
-	
+
 	public List<Book> getBooks()
 	{
 		return books;
