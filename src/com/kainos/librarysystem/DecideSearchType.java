@@ -1,4 +1,8 @@
 package com.kainos.librarysystem;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * @author evanc
@@ -12,28 +16,26 @@ public class DecideSearchType {
 	 * @param userSearch
 	 */
 	public static void CallQuery(String userSearch, String typeOfSearch){
+		List<Book> list = new ArrayList<Book>();
+		
 		//Switch to decide type of search
 		switch (typeOfSearch){
 			case "Title" : 
-				DatabaseConnectionAndQueries.searchByTitle(String userSearch);
+				list = DatabaseConnectionAndQueries.searchByTitle(String userSearch);
 				break;
 
-			
 			case "Author": 
-				DatabaseConnectionAndQueries.searchByTitle(String userSearch);
+				list = DatabaseConnectionAndQueries.searchByTitle(String userSearch);
 				break;
-			
-			
+
 			case "Category" :
-				
-				DatabaseConnectionAndQueries.searchByTitle(String userSearch);
+				list = DatabaseConnectionAndQueries.searchByTitle(String userSearch);
 				break;
 			default: 
-				
 				break;
-				
-			
 		}
+		
+		return list;
 		
 	}
 

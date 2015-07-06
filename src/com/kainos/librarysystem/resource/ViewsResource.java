@@ -3,6 +3,7 @@ package com.kainos.librarysystem.resource;
 import io.dropwizard.views.View;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -30,7 +31,7 @@ public class ViewsResource {
 	
 	@POST
 	@Timed
-	@Path("/login-details")
+	@Path("/search_books")
 	@Produces(MediaType.TEXT_HTML)
 	/**
 	 * Will call the method to decide which
@@ -42,9 +43,8 @@ public class ViewsResource {
 	public View loginDetails(@FormParam("SearchString") String searchString,
 			@FormParam("SearchType") String searchType) {
 		//call query tpye method
-		DecideSearchType.CallQuery(searchString, searchType);
-	
-
+		List<Book> list = DecideSearchType.CallQuery(searchString, searchType);
+		return new ShowBooksView(list);
 	}
 
 }
