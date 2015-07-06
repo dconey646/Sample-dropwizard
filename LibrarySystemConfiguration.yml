@@ -3,7 +3,7 @@ server:
     - type: http
       port: 9000
   adminConnectors:
-    - type: https
+    - type: http
       port: 9001
 
 viewRendererConfiguration:
