@@ -28,7 +28,7 @@
               <transformers>
                 <transformer />
                 <transformer>
-                  <mainClass>com.kainos.sampledropwizard.SampleDropwizardApplication</mainClass>
+                  <mainClass>com.kainos.librarysystem.LibrarySystemApplication</mainClass>
                 </transformer>
               </transformers>
             </configuration>
@@ -72,6 +72,9 @@
   </build>
   <properties>
     <dropwizard.version>0.8.0</dropwizard.version>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 </project>
 
