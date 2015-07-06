@@ -22,13 +22,14 @@ public class Query {
 		ArrayList<Book> books = new ArrayList<Book>();
 		
 		try{
-			r = s.executeQuery("");
+			r = s.executeQuery("select * from Books");
 			while(r.next())
 			{
-				// TODO: Create new book and add it to list
+				books.add(new Book(r.getInt(1), r.getString(2), r.getString(3), r.getInt(4), r.getString(5)));
 			}
 		}catch(SQLException e){
-			//TODO: Handle Exception
+			e.getStackTrace();
+			//TODO: Handle Exception better
 		}
 		return books;
 	}

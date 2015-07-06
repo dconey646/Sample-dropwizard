@@ -1,4 +1,4 @@
-x package com.kainos.librarysystem;
+package com.kainos.librarysystem;
 
 import com.google.common.collect.ImmutableMap;
 import com.kainos.librarysystem.configuration.LibrarySystemConfiguration;
