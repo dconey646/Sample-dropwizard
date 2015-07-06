@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kainos.librarysystem.views.Index;
+import com.kainos.librarysystem.views.ShowBooksView;
 
 @Path("/hello-world")
 public class ViewsResource {
@@ -28,5 +29,6 @@ public class ViewsResource {
 	public View sayHello(){
 		return new Index();
 	}
+	
 
 }
