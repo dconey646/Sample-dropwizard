@@ -24,7 +24,7 @@
   </fileSets>
   <files>
     <file>
-      <source>SampleDropwizardConfiguration.yml</source>
+      <source>LibrarySystemConfiguration.yml</source>
       <outputDirectory>/</outputDirectory>
       <filtered>true</filtered>
     </file>
