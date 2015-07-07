@@ -1,9 +1,7 @@
 package com.kainos.librarysystem.views;
 
 import io.dropwizard.views.View;
-
 import java.util.List;
-
 import com.kainos.librarysystem.database.Book;
 
 public class ShowBooksView extends View{
@@ -24,5 +22,4 @@ public class ShowBooksView extends View{
 	{
 		this.books = books;
 	}
-
 }
