@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Connector {
 	
 	private static final String USERNAME = "libraryUser";
-	private static final String PASSWORD = "MySuperSafePassw0rd";
+	private static final String PASSWORD = "MySuperSafePassw0rd!";
 	private static final String CONNECTION = "jdbc:mysql://localhost/Library";
 	
 
