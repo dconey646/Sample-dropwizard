@@ -65,5 +65,14 @@ public class ViewsResource {
 		List<Book> booksList = q.getAllBooks();
 		return new ShowBooksView(booksList);
 	}
+	
+	@GET
+	@Timed
+	@Path("/viewBookDetails")
+	@Produces(MediaType.TEXT_HTML)
+	public View viewBookDetails(int id) throws SQLException {
+		Book book = q.getBookDetails(id);
+		return null//new ShowBookDetailsView(book);
+	}
 
 }
