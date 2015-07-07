@@ -2,6 +2,7 @@ package com.kainos.librarysystem.resource;
 
 import io.dropwizard.views.View;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,6 @@ import com.kainos.librarysystem.database.Book;
 import com.kainos.librarysystem.database.Query;
 import com.kainos.librarysystem.views.ShowBooksView;
 // import com.kainos.librarysystem.DecideSearchType;
-import com.kainos.librarysystem.views.Index;
 
 @Path("/")
 public class ViewsResource {
@@ -61,7 +61,7 @@ public class ViewsResource {
 	@Timed
 	@Path("/viewBooks")
 	@Produces(MediaType.TEXT_HTML)
-	public View viewBooks() {
+	public View viewBooks() throws SQLException {
 		List<Book> booksList = q.getAllBooks();
 		return new ShowBooksView(booksList);
 	}

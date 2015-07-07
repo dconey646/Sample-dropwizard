@@ -20,7 +20,7 @@ public class Query {
 		s = Connector.getConnection();
 	}
 	
-	public List<Book> getAllBooks()
+	public List<Book> getAllBooks() throws SQLException
 	{
 		ResultSet r;
 		ArrayList<Book> books = new ArrayList<Book>();
@@ -28,12 +28,24 @@ public class Query {
 		try{
 			r = s.executeQuery("select * from Book;");
 			while(r.next())
-			{
-				books.add(new Book(r.getInt(1), r.getString(2), r.getString(3), r.getInt(4), r.getString(5)));
+			{	
+				Book book = new Book();	
+				book.setBookID(r.getInt(1));
+				book.setBookTitle(r.getString(2));
+				book.setAuthor(r.getString(3));
+				book.setYear(Integer.toString(r.getInt(4)));
+				book.setCategory(r.getString(5));
+				
+				if(r.getInt(6) == 1) {
+					book.setAvailable(true);
+				} else {
+					book.setAvailable(false);
+				}
+				
+				books.add(book);
 			}
 		}catch(SQLException e){
-			e.getStackTrace();
-			//TODO: Handle Exception better
+			throw e;
 		}
 		return books;
 	}
