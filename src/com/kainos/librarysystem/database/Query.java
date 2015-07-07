@@ -29,18 +29,7 @@ public class Query {
 			r = s.executeQuery("select * from Book;");
 			while(r.next())
 			{	
-				Book book = new Book();	
-				book.setBookID(r.getInt(1));
-				book.setBookTitle(r.getString(2));
-				book.setAuthor(r.getString(3));
-				book.setYear(Integer.toString(r.getInt(4)));
-				book.setCategory(r.getString(5));
-				
-				if(r.getInt(6) == 1) {
-					book.setAvailable(true);
-				} else {
-					book.setAvailable(false);
-				}
+				Book book = buildBook(r);
 				
 				books.add(book);
 			}
@@ -49,11 +38,9 @@ public class Query {
 		}
 		return books;
 	}
-
-	public Book getBookDetails(String id) throws SQLException{
-		
-		ResultSet r = s.executeQuery("select * from Book where id = " +id+ ";");
-		r.next();
+	
+	public Book buildBook(ResultSet r) throws SQLException
+	{
 		Book book = new Book();	
 		book.setBookID(r.getInt(1));
 		book.setBookTitle(r.getString(2));
@@ -66,6 +53,15 @@ public class Query {
 		} else {
 			book.setAvailable(false);
 		}
+		
+		return book;
+	}
+
+	public Book getBookDetails(String id) throws SQLException{
+		
+		ResultSet r = s.executeQuery("select * from Book where id = " +id+ ";");
+		r.next();
+		Book book = buildBook(r);
 		return book;
 	}
 
