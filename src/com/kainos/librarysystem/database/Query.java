@@ -101,7 +101,7 @@ public class Query {
 
 	public Book getBookDetails(String id) throws SQLException{
 		
-		ResultSet r = s.executeQuery("select * from Book where id = " +id+ ";");
+		ResultSet r = statement.executeQuery("select * from Book where id = " +id+ ";");
 		r.next();
 		Book book = new Book();	
 		book.setBookID(r.getInt(1));
