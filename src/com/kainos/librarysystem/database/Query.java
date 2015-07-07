@@ -1,23 +1,25 @@
 package com.kainos.librarysystem.database;
+import com.kainos.librarysystem.database.Connector;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.kainos.librarysystem.database.Book;
-import com.kainos.librarysystem.database.Connector;
-
 public class Query {
 	
-	public Statement s;
-	public final String DATABASE_NAME = "Library";
+	private static Connection conn;
+	private Statement statement;
+	private PreparedStatement pStatement;
 	
 	
-	public Query()
+	public Query() throws SQLException
 	{
-		s = Connector.getConnection();
+		conn = Connector.getConnection();
+		statement = conn.createStatement();
 	}
 	
 	public List<Book> getAllBooks() throws SQLException
@@ -26,40 +28,86 @@ public class Query {
 		ArrayList<Book> books = new ArrayList<Book>();
 		
 		try{
-			r = s.executeQuery("select * from Book;");
+			r = statement.executeQuery("select * from Book;");
 			while(r.next())
 			{	
 				Book book = buildBook(r);
 				
 				books.add(book);
 			}
-		}catch(SQLException e){
-			throw e;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			// throw e;
+		}
+		return books;
+	}
+	
+	public List<Book> searchByTitle(String searchString) {
+		String titleSQL = "SELECT * " +
+						  "FROM Book WHERE title LIKE ?;";
+		return this.performQuery(titleSQL, searchString);
+	}
+	
+	public List<Book> searchByAuthor(String searchString) {
+		String authorSQL = "SELECT * " +
+						  "FROM Book WHERE author LIKE ?;";
+		return this.performQuery(authorSQL, searchString);
+	}
+	
+	public List<Book> searchByCategory(String searchString) {
+		String categorySQL = "SELECT * " +
+						  "FROM Book WHERE category LIKE ?;";
+		return this.performQuery(categorySQL, searchString);
+	}
+	
+	public List<Book> performQuery(String query, String searchString) {		
+		ResultSet results;
+		
+		try {
+			pStatement = conn.prepareStatement(query);
+			pStatement.setString(1, "%" + searchString + "%");
+			results = pStatement.executeQuery();
+			return this.generateBookList(results);
+		} catch (SQLException e) {
+			System.err.println("Error performing SQL query: " + e.getMessage());
+		}
+		return null;
+	}
+	
+	public ArrayList<Book> generateBookList(ResultSet results) {
+		ArrayList<Book> books = new ArrayList<Book>();
+		try {
+			while(results.next())
+			{
+				books.add(buildBook(results));
+			}
+		} catch (SQLException e) {
+			System.err.println("Failed creating book list: " + e.getMessage());
 		}
 		return books;
 	}
 	
 	public Book buildBook(ResultSet r) throws SQLException
 	{
-		Book book = new Book();	
-		book.setBookID(r.getInt(1));
-		book.setBookTitle(r.getString(2));
-		book.setAuthor(r.getString(3));
-		book.setYear(Integer.toString(r.getInt(4)));
-		book.setCategory(r.getString(5));
-		
-		if(r.getInt(6) == 1) {
-			book.setAvailable(true);
-		} else {
-			book.setAvailable(false);
-		}
-		
-		return book;
+	Book book = new Book();	
+	book.setBookID(r.getInt(1));
+	book.setBookTitle(r.getString(2));
+	book.setAuthor(r.getString(3));
+	book.setYear(Integer.toString(r.getInt(4)));
+	book.setCategory(r.getString(5));
+	
+	if(r.getInt(6) == 1) {
+		book.setAvailable(true);
+	} else {
+		book.setAvailable(false);
 	}
+	return book;
+	}
+
 
 	public Book getBookDetails(String id) throws SQLException{
 		
-		ResultSet r = s.executeQuery("select * from Book where id = " +id+ ";");
+		ResultSet r = statement.executeQuery("select * from Book where id = " +id+ ";");
 		r.next();
 		Book book = buildBook(r);
 		return book;
@@ -67,7 +115,7 @@ public class Query {
 	
 	public Book borrowBook(String id, String username) throws SQLException
 	{
-		s.executeUpdate("update Book set userName='" + username + "', dateOfLoan=NOW(), isAvailable=0 WHERE id=" + id);
+		statement.executeUpdate("update Book set userName='" + username + "', dateOfLoan=NOW(), isAvailable=0 WHERE id=" + id);
 		return getBookDetails(id);
 	}
 

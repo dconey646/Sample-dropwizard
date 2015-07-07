@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Story 1</title>
+    <title>kLibrary</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" href="http://xz.rs/_/bootstrap.min.css" media="screen">
@@ -31,11 +31,11 @@
                   </div>
 
                   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <form class="navbar-form navbar-right" role="search">
+                    <form class="navbar-form navbar-right" role="search" method="POST" action="search-books">
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="Search" name="SearchString">
                       </div>
-                      <select class="form-control" id="select">
+                      <select class="form-control" id="select" name="SearchType">
                         <option>Title</option>
                         <option>Author</option>
                         <option>Category</option>
@@ -53,6 +53,7 @@
         </div>
       </div>
 
+      <#if books?has_content>
       <div class="row">
         <!-- All the books and stuff -->
         
@@ -83,6 +84,12 @@
         </div>
         </#list>
       </div>
+      <#else>
+      <div>
+        No results found.
+      </div>
+      </#if>
+      
 
 
 

