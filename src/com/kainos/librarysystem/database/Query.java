@@ -1,4 +1,5 @@
 package com.kainos.librarysystem.database;
+import com.kainos.librarysystem.database.Connector;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,18 +31,7 @@ public class Query {
 			r = statement.executeQuery("select * from Book;");
 			while(r.next())
 			{	
-				Book book = new Book();	
-				book.setBookID(r.getInt(1));
-				book.setBookTitle(r.getString(2));
-				book.setAuthor(r.getString(3));
-				book.setYear(Integer.toString(r.getInt(4)));
-				book.setCategory(r.getString(5));
-				
-				if(r.getInt(6) == 1) {
-					book.setAvailable(true);
-				} else {
-					book.setAvailable(false);
-				}
+				Book book = buildBook(r);
 				
 				books.add(book);
 			}
@@ -89,33 +79,44 @@ public class Query {
 		try {
 			while(results.next())
 			{
-				books.add(new Book(results.getInt(1), results.getString(2),
-						           results.getString(3), results.getString(4),
-						           results.getString(5), results.getBoolean(6)));
+				books.add(buildBook(results));
 			}
 		} catch (SQLException e) {
 			System.err.println("Failed creating book list: " + e.getMessage());
 		}
 		return books;
 	}
+	
+	public Book buildBook(ResultSet r) throws SQLException
+	{
+	Book book = new Book();	
+	book.setBookID(r.getInt(1));
+	book.setBookTitle(r.getString(2));
+	book.setAuthor(r.getString(3));
+	book.setYear(Integer.toString(r.getInt(4)));
+	book.setCategory(r.getString(5));
+	
+	if(r.getInt(6) == 1) {
+		book.setAvailable(true);
+	} else {
+		book.setAvailable(false);
+	}
+	return book;
+	}
+
 
 	public Book getBookDetails(String id) throws SQLException{
 		
 		ResultSet r = statement.executeQuery("select * from Book where id = " +id+ ";");
 		r.next();
-		Book book = new Book();	
-		book.setBookID(r.getInt(1));
-		book.setBookTitle(r.getString(2));
-		book.setAuthor(r.getString(3));
-		book.setYear(Integer.toString(r.getInt(4)));
-		book.setCategory(r.getString(5));
-		
-		if(r.getInt(6) == 1) {
-			book.setAvailable(true);
-		} else {
-			book.setAvailable(false);
-		}
+		Book book = buildBook(r);
 		return book;
+	}
+	
+	public Book borrowBook(String id, String username) throws SQLException
+	{
+		statement.executeUpdate("update Book set userName='" + username + "', dateOfLoan=NOW(), isAvailable=0 WHERE id=" + id);
+		return getBookDetails(id);
 	}
 
 }

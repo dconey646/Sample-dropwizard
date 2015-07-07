@@ -70,14 +70,13 @@ public class ViewsResource {
 		Book book = q.getBookDetails(id);
 		return new ShowBookDetailsView(book);
 	}
-	
-//	@POST
-//	@Timed
-//	@Path("/borrowBook/{id}")
-//	@Produces(MediaType.TEXT_HTML)
-//	public View borrowBook(@PathParam("id")String id, @FormParam("username")) throws SQLException
-//	{
-//		
-//	}
 
+	@POST
+	@Timed
+	@Path("/borrow/{id}")
+	@Produces(MediaType.TEXT_HTML)
+	public View borrowBook(@PathParam("id")String id, @FormParam("username")String username) throws SQLException {
+		Book book = q.borrowBook(id, username);
+		return new ShowBookDetailsView(book);
+	}
 }

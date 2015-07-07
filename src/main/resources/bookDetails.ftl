@@ -80,7 +80,21 @@
              <span class="media-author">${book.author}</span>
              <br><small>${book.category} &mdash; ${book.year}</small>
              <hr>
-             <button class="btn btn-success">Borrow</button>
+             <#if book.available>
+				<button class="btn btn-success js-btn-borrow">Borrow</button>
+				<div id="borrow-form" class="row" style="margin-top:15px">
+				<div class="clearfix col-lg-6">
+				<form action="/borrow/${book.bookID}" method="POST">
+				<div class="form-group">
+				<label class="control-label" for="focusedInput">Your name</label>
+				<input class="form-control" name="username" type="text" placeholder="">
+				</div>
+				<input type="submit" value="Borrow this book" class="btn btn-success js-btn-submit"> <button class="btn btn-default js-btn-cancel">Cancel</button>
+				</form>
+				</div>
+			</div>
+			<#else>
+            </#if>
           </div>
         </div>
 
@@ -103,7 +117,22 @@
 
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script>
+$('#borrow-form').hide();
+function showBorrowForm() {
+$('#borrow-form').show();
+$('.js-btn-borrow').hide();
+}
+$('.js-btn-borrow').click(showBorrowForm);
+function cancelBorrowForm() {
+$('#borrow-form').hide();
+$('.js-btn-borrow').show();
+}
+$('.js-btn-cancel').click(cancelBorrowForm);
+</script>
+
     <script src="http://xz.rs/_/bootstrap.min.js"></script>
+
 </body>
 </html>
 
