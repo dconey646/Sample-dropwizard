@@ -4,7 +4,7 @@ Use Library;
 
 Create table Book(id int primary key auto_increment, title varchar(256) not null, author varchar(65) not null, yearPublished int not null, 
 category varchar(45) not null, isAvailable tinyint not null);
-Drop user 'libraryUsrer'@localhost;
+Drop user 'libraryUser'@localhost;
 Create user 'libraryUser'@localhost identified by 'MySuperSafePassw0rd!';
 Grant Select, Update, Delete on Book to 'libraryUser'@'localhost';
 
