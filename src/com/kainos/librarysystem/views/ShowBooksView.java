@@ -2,18 +2,17 @@ package com.kainos.librarysystem.views;
 
 import io.dropwizard.views.View;
 
-import java.awt.print.Book;
 import java.util.List;
+
+import com.kainos.librarysystem.database.Book;
 
 public class ShowBooksView extends View{
 	
-	public List<Book> books;
+	private List<Book> books;
 	
-
-	
-	public ShowBooksView(List<com.kainos.librarysystem.database.Book> booksList) {
+	public ShowBooksView(List<Book> booksList) {
 		super("/bookList.ftl");
-		setBooks(books);
+		setBooks(booksList);
 	}
 
 	public List<Book> getBooks()
