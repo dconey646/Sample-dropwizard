@@ -72,7 +72,17 @@
             <h2 class="media-heading">CSS Book</h2>
              <span class="media-author">Dan Cederholm</span>
              <hr>
-             <button class="btn btn-success">Borrow</button>
+             <button class="btn btn-success js-btn-borrow">Borrow</button>
+             <div id="borrow-form" class="row" style="margin-top:15px">
+               <div class="clearfix col-lg-6">
+                 <div class="form-group">
+                   <label class="control-label" for="focusedInput">Your name</label>
+                   <input class="form-control" type="text" placeholder="">
+                 </div>
+                 <button class="btn btn-success js-btn-submit">Borrow this book</button> <button class="btn btn-default js-btn-cancel">Cancel</button>
+               </div>
+             </div>
+
           </div>
 
         </div>
@@ -80,23 +90,30 @@
 
       </div>
 
-
-
-      <!-- <footer>
-        <div class="row">
-          <div class="col-lg-12">
-            <small>6/7/2015</small>
-          </div>
-        </div>
-
-      </footer> -->
-
-
     </div>
 
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script>
+
+     $('#borrow-form').hide();
+
+     function showBorrowForm() {
+        $('#borrow-form').show();
+        $('.js-btn-borrow').hide();
+     }
+
+     $('.js-btn-borrow').click(showBorrowForm);
+
+     function cancelBorrowForm() {
+        $('#borrow-form').hide();
+        $('.js-btn-borrow').show();
+     }
+
+     $('.js-btn-cancel').click(cancelBorrowForm);
+
+    </script>
 </body>
 </html>
 
