@@ -9,6 +9,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -16,6 +17,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.kainos.librarysystem.DecideSearchType;
 import com.kainos.librarysystem.database.Book;
 import com.kainos.librarysystem.database.Query;
+import com.kainos.librarysystem.views.ShowBookDetailsView;
 import com.kainos.librarysystem.views.ShowBooksView;
 
 @Path("/")
@@ -58,6 +60,15 @@ public class ViewsResource {
 	public View viewBooks() throws SQLException {
 		List<Book> booksList = q.getAllBooks();
 		return new ShowBooksView(booksList);
+	}
+	
+	@GET
+	@Timed
+	@Path("/viewBookDetails/{id}")
+	@Produces(MediaType.TEXT_HTML)
+	public View viewBookDetails(@PathParam("id")String id) throws SQLException {
+		Book book = q.getBookDetails(id);
+		return new ShowBookDetailsView(book);
 	}
 
 }
