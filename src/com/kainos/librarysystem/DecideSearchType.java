@@ -38,6 +38,7 @@ public class DecideSearchType {
 				list = query.searchByTitle(userSearch);
 				break;
 			default: 
+				//wiill leave the statement and return an empty list
 				break;
 		}
 		
