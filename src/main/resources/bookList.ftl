@@ -59,7 +59,7 @@
         <#list books as book>
 		
         <div class="col-lg-3 col-md-3 col-xs-6 training-material-container">
-          <a href="/story/1/book.html">
+          <a href="/viewBookDetails/${book.bookID}">
             <div class="productbox">
             <div class="imgthumb img-responsive training-material-image">
               <img src="http://placehold.it/100x150">
