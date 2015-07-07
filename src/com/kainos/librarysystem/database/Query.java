@@ -50,8 +50,10 @@ public class Query {
 		return books;
 	}
 
-	public Book getBookDetails(int id) throws SQLException{
+	public Book getBookDetails(String id) throws SQLException{
+		
 		ResultSet r = s.executeQuery("select * from Book where id = " +id+ ";");
+		r.next();
 		Book book = new Book();	
 		book.setBookID(r.getInt(1));
 		book.setBookTitle(r.getString(2));
