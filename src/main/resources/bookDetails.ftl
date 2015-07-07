@@ -57,8 +57,7 @@
       <div class="row">
         <!-- All the books and stuff -->
 
-        <div class="col-lg-3 col-md-3 col-xs-6 training-material-container">
-          <a href="http://google.com">
+        <div class="col-lg-3 col-md-12 col-xs-12 training-material-container">
             <div class="productbox">
               <div class="imgthumb img-responsive training-material-image">
                 <img src="http://placehold.it/100x150">
@@ -71,7 +70,6 @@
               	</#if>
               </h4>
             </div>
-          </a>
         </div>
         
       
