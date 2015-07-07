@@ -64,5 +64,11 @@ public class Query {
 		Book book = buildBook(r);
 		return book;
 	}
+	
+	public Book borrowBook(String id, String username) throws SQLException
+	{
+		s.executeUpdate("update Book set userName='" + username + "', dateOfLoan=NOW(), isAvailable=0 WHERE id=" + id);
+		return getBookDetails(id);
+	}
 
 }

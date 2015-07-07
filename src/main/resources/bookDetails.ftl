@@ -84,10 +84,10 @@
 				<button class="btn btn-success js-btn-borrow">Borrow</button>
 				<div id="borrow-form" class="row" style="margin-top:15px">
 				<div class="clearfix col-lg-6">
-				<form action="" method="POST">
+				<form action="/borrow/${book.bookID}" method="POST">
 				<div class="form-group">
 				<label class="control-label" for="focusedInput">Your name</label>
-				<input class="form-control" type="text" placeholder="">
+				<input class="form-control" name="username" type="text" placeholder="">
 				</div>
 				<input type="submit" value="Borrow this book" class="btn btn-success js-btn-submit"> <button class="btn btn-default js-btn-cancel">Cancel</button>
 				</form>
