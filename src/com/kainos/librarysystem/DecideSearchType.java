@@ -1,8 +1,9 @@
-//package com.kainos.librarysystem;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
+package com.kainos.librarysystem;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.kainos.librarysystem.database.Book;
 import com.kainos.librarysystem.database.Query;
 
@@ -21,21 +22,22 @@ public class DecideSearchType {
 	 * @param userSearch
 	 * @return 
 	 */
-	public List<Book> CallQuery(String userSearch, String typeOfSearch){
+	public static List<Book> CallQuery(String userSearch, String typeOfSearch) throws SQLException {
 		List<Book> list = new ArrayList<Book>();
+		query = new Query();
 		
 		//Switch to decide type of search
 		switch (typeOfSearch){
 			case "Title" : 
 				list = query.searchByTitle(userSearch);
-//				break;
-//
-//			case "Category" :
-				list = query.searchByTitle(userSearch);
 				break;
 
 			case "Category" :
-				list = query.searchByTitle(userSearch);
+				list = query.searchByCategory(userSearch);
+				break;
+
+			case "Author" :
+				list = query.searchByAuthor(userSearch);
 				break;
 			default: 
 				break;

@@ -4,19 +4,19 @@ import io.dropwizard.views.View;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.List;
 
 import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.codahale.metrics.annotation.Timed;
+import com.kainos.librarysystem.DecideSearchType;
 import com.kainos.librarysystem.database.Book;
 import com.kainos.librarysystem.database.Query;
 import com.kainos.librarysystem.views.ShowBooksView;
-import com.kainos.librarysystem.DecideSearchType;
 
 @Path("/")
 public class ViewsResource {
@@ -26,7 +26,7 @@ public class ViewsResource {
 	private final String template;
 	private final String defaultName;
 	
-	public ViewsResource(String template, String defaultName){
+	public ViewsResource(String template, String defaultName) throws SQLException {
 		this.template = template;
 		this.defaultName = defaultName;
 		q = new Query();
@@ -41,11 +41,11 @@ public class ViewsResource {
 	 */
 	@POST
 	@Timed
-	@Path("/search_books")
+	@Path("/search-books")
 	@Produces(MediaType.TEXT_HTML)
 
 	public View bookList(@FormParam("SearchString") String searchString,
-			@FormParam("SearchType") String searchType) {
+			@FormParam("SearchType") String searchType) throws SQLException {
 		//call query tpye method
 		List<Book> list = DecideSearchType.CallQuery(searchString, searchType);
 		return new ShowBooksView(list);
