@@ -5,10 +5,13 @@ public class Book {
 	private int bookID;
 	private String bookTitle;
 	private String author;
-	private int year;
+	private String year;
 	private String category;
+	private boolean available;
 	
-	public Book(int bookID, String bookTitle, String author, int year, String category){
+	public Book() { }
+	
+	public Book(int bookID, String bookTitle, String author, String year, String category, boolean available){
 		this.bookID= bookID;
 		this.bookTitle = bookTitle;
 		this.setAuthor(author);
@@ -40,11 +43,11 @@ public class Book {
 		this.category = category;
 	}
 
-	public int getYear() {
+	public String getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 
@@ -55,7 +58,14 @@ public class Book {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	
-	
-	
+
+	public boolean getAvailable() {
+		return available;
 	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+	
+	
+}

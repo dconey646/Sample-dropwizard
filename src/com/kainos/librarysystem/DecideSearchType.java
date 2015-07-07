@@ -1,8 +1,8 @@
-package com.kainos.librarysystem;
-
-import java.util.ArrayList;
-import java.util.List;
-
+//package com.kainos.librarysystem;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//
 import com.kainos.librarysystem.database.Book;
 import com.kainos.librarysystem.database.Query;
 
@@ -28,9 +28,9 @@ public class DecideSearchType {
 		switch (typeOfSearch){
 			case "Title" : 
 				list = query.searchByTitle(userSearch);
-				break;
-
-			case "Author": 
+//				break;
+//
+//			case "Category" :
 				list = query.searchByTitle(userSearch);
 				break;
 

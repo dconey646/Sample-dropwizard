@@ -1,20 +1,18 @@
 package com.kainos.librarysystem.views;
 
 import io.dropwizard.views.View;
-
 import java.util.List;
-
 import com.kainos.librarysystem.database.Book;
 
 public class ShowBooksView extends View{
 	
-	public List<Book> books;
+	private List<Book> books;
 	
-	public ShowBooksView(List<Book> books){
+	public ShowBooksView(List<Book> booksList) {
 		super("/bookList.ftl");
-		setBooks(books);
+		setBooks(booksList);
 	}
-	
+
 	public List<Book> getBooks()
 	{
 		return books;
@@ -24,5 +22,4 @@ public class ShowBooksView extends View{
 	{
 		this.books = books;
 	}
-
 }
